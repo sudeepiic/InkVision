@@ -6,7 +6,9 @@ export default defineNuxtConfig({
     "shadcn-nuxt",
     "@nuxtjs/tailwindcss",
     "@nuxtjs/color-mode",
+    // "@nuxtjs/supabase",
   ],
+
   vite: {
     server: {
       hmr: {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Activity, ArrowUpRight, CircleUser, CreditCard, DollarSign, Menu, Package2, Search, Users } from 'lucide-vue-next'
+import { Activity, ArrowUpRight, CircleUser, CreditCard, DollarSign, Menu, Search, Users, Pencil } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
@@ -17,25 +17,13 @@ const colorMode = useColorMode()
           href="#"
           class="flex items-center gap-2 text-lg font-semibold md:text-base"
         >
-          <Package2 class="h-6 w-6" />
-          <span class="sr-only">Acme Inc</span>
+          <Pencil class="h-6 w-6" />
+          <span  >InkVision</span>
         </a>
-        <a
-          href="#"
-          class="text-foreground transition-colors hover:text-foreground"
-        >
-          Dashboard
-        </a>
-        <a
-          href="#"
-          class="text-muted-foreground transition-colors hover:text-foreground"
-        >
-          Orders
-        </a>
-       
+    
      
  
-        <NuxtLink to="/admin">Manage</NuxtLink>
+        <NuxtLink to="/login">Manage</NuxtLink>
       </nav>
       <Sheet>
         <SheetTrigger as-child>
@@ -54,36 +42,11 @@ const colorMode = useColorMode()
               href="#"
               class="flex items-center gap-2 text-lg font-semibold"
             >
-              <Package2 class="h-6 w-6" />
-              <span class="sr-only">Acme Inc</span>
+              <Pencil class="h-6 w-6" />
+              <span >InkVision</span>
             </a>
-            <a href="#" class="hover:text-foreground">
-              Dashboard
-            </a>
-            <a
-              href="#"
-              class="text-muted-foreground hover:text-foreground"
-            >
-              Orders
-            </a>
-            <a
-              href="#"
-              class="text-muted-foreground hover:text-foreground"
-            >
-              Products
-            </a>
-            <a
-              href="#"
-              class="text-muted-foreground hover:text-foreground"
-            >
-              Customers
-            </a>
-            <a
-              href="#"
-              class="text-muted-foreground hover:text-foreground"
-            >
-              Analytics
-            </a>
+                 <NuxtLink to="/login">Manage</NuxtLink>
+
           </nav>
         </SheetContent>
       </Sheet>
@@ -93,7 +56,7 @@ const colorMode = useColorMode()
             <Search class="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
               type="search"
-              placeholder="Search products..."
+              placeholder="Search projects..."
               class="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
             />
           </div>
@@ -125,65 +88,65 @@ const colorMode = useColorMode()
       <div class="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
         <Card>
           <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle class="text-sm font-medium">
-              Total Revenue
+            <CardTitle class="text-m font-medium">
+              KNKY
             </CardTitle>
             <DollarSign class="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div class="text-2xl font-bold">
-              $45,231.89
+            <div class="text-3xl font-bold mb-2">
+            Dashboard Review
             </div>
-            <p class="text-xs text-muted-foreground">
-              +20.1% from last month
+            <p class="text-s text-muted-foreground">
+             Due in 02 Days
             </p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle class="text-sm font-medium">
-              Subscriptions
+            <CardTitle class="text-m font-medium">
+              V-Estate
             </CardTitle>
             <Users class="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div class="text-2xl font-bold">
-              +2350
+            <div class="text-3xl font-bold mb-2">
+              Admin Panel Apis
             </div>
-            <p class="text-xs text-muted-foreground">
-              +180.1% from last month
+            <p class="text-s text-muted-foreground">
+             Due In 05 Days
             </p>
           </CardContent>
         </Card>
-        <Card>
+      <Card>
           <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle class="text-sm font-medium">
-              Sales
+            <CardTitle class="text-m font-medium">
+              V-Retail Product
             </CardTitle>
-            <CreditCard class="h-4 w-4 text-muted-foreground" />
+            <Users class="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div class="text-2xl font-bold">
-              +12,234
+            <div class="text-3xl font-bold mb-2">
+             Widget Migration to tailwind
             </div>
-            <p class="text-xs text-muted-foreground">
-              +19% from last month
+            <p class="text-s text-muted-foreground">
+             Due Today
             </p>
           </CardContent>
         </Card>
-        <Card>
+         <Card>
           <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle class="text-sm font-medium">
-              Active Now
+            <CardTitle class="text-m font-medium">
+              V-Retail Website
             </CardTitle>
-            <Activity class="h-4 w-4 text-muted-foreground" />
+            <Users class="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div class="text-2xl font-bold">
-              +573
+            <div class="text-3xl font-bold mb-2">
+             AI Analytics Page
             </div>
-            <p class="text-xs text-muted-foreground">
-              +201 since last hour
+            <p class="text-s text-muted-foreground">
+             Due In 01 Day
             </p>
           </CardContent>
         </Card>
