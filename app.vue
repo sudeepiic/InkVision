@@ -1,6 +1,6 @@
+
 <template>
   <NuxtPage />
-  
 </template>
 
 <style>
@@ -14,3 +14,8 @@
   filter: blur(1rem);
 }
 </style>
+
+<style >
+.flip-card__bottom{
+  border-top: none !important;
+}</style>

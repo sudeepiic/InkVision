@@ -2,6 +2,30 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+
+const supabase = useSupabaseClient()
+const route = useRoute()
+const user = useSupabaseUser();
+console.log(user)
+
+const signIn = async () => {
+  const { error } = await supabase.auth.signInWithPassword({
+    email: username.value,
+    password: password.value,
+
+  })
+  if (error) console.log(error)
+  navigateTo('/admin')
+
+
+}
+
+const username = ref('sudeepzmr@gmail.com');
+const password = ref('inkincaps12');
+
+
+
+
 </script>
 
 <template>
@@ -19,40 +43,23 @@ import { Label } from '@/components/ui/label'
         <div class="grid gap-4">
           <div class="grid gap-2">
             <Label for="email">Email</Label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="m@example.com"
-              required
-            />
+            <Input id="email" type="email" v-model="username" placeholder="m@example.com" required />
           </div>
           <div class="grid gap-2">
-            <!-- <div class="flex items-center">
-              <Label for="password">Password</Label>
-              <a
-                href="/forgot-password"
-                class="ml-auto inline-block text-sm underline"
-              >
-                Forgot your password?
-              </a>
-            </div> -->
-            <Input id="password" type="password" required />
+
+            <Input v-model="password" id="password" type="password" required />
           </div>
-          <Button type="submit" class="w-full">
+          <Button @click="signIn" type="submit" class="w-full">
             Login
           </Button>
-        
+
         </div>
-       
+
       </div>
     </div>
     <div class="hidden bg-muted lg:block">
-      <img
-        src="assets/placeholder.png"
-        alt="Image"
-      
-        class="w-full max-h-screen overflow-clip object-cover dark:brightness-[0.2] dark:grayscale"
-      >
+      <img src="assets/placeholder.png" alt="Image"
+        class="w-full max-h-screen overflow-clip object-cover dark:brightness-[0.2] dark:grayscale">
     </div>
   </div>
 </template>

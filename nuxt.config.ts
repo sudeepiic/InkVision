@@ -6,8 +6,18 @@ export default defineNuxtConfig({
     "shadcn-nuxt",
     "@nuxtjs/tailwindcss",
     "@nuxtjs/color-mode",
-    // "@nuxtjs/supabase",
+    "@nuxtjs/supabase",
   ],
+
+  supabase: {
+    redirectOptions: {
+      login: "/login",
+      callback: "/confirm",
+      include: undefined,
+      exclude: ["/"],
+      cookieRedirect: false,
+    },
+  },
 
   vite: {
     server: {
@@ -16,6 +26,7 @@ export default defineNuxtConfig({
       },
     },
   },
+
   colorMode: {
     classSuffix: "",
   },
