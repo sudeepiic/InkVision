@@ -9,9 +9,24 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { ProjectDialog } from '~/components/ui/project-dialog'
 import { ProjectsTable } from '~/components/ui/projects-table'
 import { Logout } from '~/components/ui/logout'
+useHead({
+  title: 'Manage - InkVision',
+
+})
+
 
 const user = useSupabaseUser();
 console.log(user)
+
+const supabase = useSupabaseClient()
+const { data } = await supabase
+  .from('projects')
+  .select()
+
+console.log(data)
+const projects = useState('counter', () => data)
+console.log("state", projects)
+
 </script>
 
 <template>
@@ -59,22 +74,7 @@ console.log(user)
 
 
             </nav>
-            <div class="mt-auto">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Upgrade to Pro</CardTitle>
-                  <CardDescription>
-                    Unlock all features and get unlimited access to our
-                    support team.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Button size="sm" class="w-full">
-                    Upgrade
-                  </Button>
-                </CardContent>
-              </Card>
-            </div>
+
           </SheetContent>
         </Sheet>
         <div class="w-full flex-1">
@@ -94,9 +94,14 @@ console.log(user)
             Projects
           </h1>
         </div>
-        <ProjectsTable />
 
-        <div class="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm">
+        <div v-if="projects && projects.length > 0">
+          <ProjectsTable />
+        </div>
+        <div v-if="projects && projects.length == 0"
+          class="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm">
+          }
+
           <div class="flex flex-col items-center gap-1 text-center">
             <h3 class="text-2xl font-bold tracking-tight">
               You have no products

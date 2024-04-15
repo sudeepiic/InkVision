@@ -7,7 +7,10 @@ const supabase = useSupabaseClient()
 const route = useRoute()
 const user = useSupabaseUser();
 console.log(user)
+useHead({
+  title: 'Login - InkVision',
 
+})
 const signIn = async () => {
   const { error } = await supabase.auth.signInWithPassword({
     email: username.value,

@@ -1,15 +1,9 @@
 <script setup lang="ts">
 
 import {
-  Activity,
-  ArrowUpRight,
-  CircleUser,
-  CreditCard,
-  DollarSign,
+
   Menu,
-  Search,
-  Users,
-  Pencil,
+
 } from "lucide-vue-next";
 import { Separator } from '@/components/ui/separator'
 
@@ -17,23 +11,19 @@ import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Icon } from "@iconify/vue";
 const user = useSupabaseUser();
 console.log(user)
+useHead({
+  title: 'Home - InkVision',
+
+})
 const colorMode = useColorMode();
 </script>
 
@@ -80,97 +70,101 @@ const colorMode = useColorMode();
 
       </div>
     </header>
-    <main class="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
-      <div class="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
+    <ClientOnly>
 
-        <Card>
-          <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle class="text-m font-medium"> KNKY </CardTitle>
-            <img class="h-[30px] dark:invert" src="https://client-test.knky.co/images/knky.svg" />
-          </CardHeader>
-          <CardContent>
-            <div class="text-3xl font-bold ">Dashboard Review</div>
-            <p class="text-s  mb-5 text-muted-foreground">
-              <ClientOnly>
-                <Countdown deadlineISO="2024-05-13T08:39:49.108Z" mainFlipBackgroundColor="#000"
-                  secondFlipBackgroundColor="#000" :flipAnimation="false"
-                  :labelColor="colorMode.preference == 'light' ? 'black' : 'white'"
-                  :mainColor="colorMode.preference == 'light' ? 'black' : 'white'" secondFlipColor="#ffffff"
-                  @timeElapsed="(time: any) => {
-                    console.log(time)
-                  }" />
-              </ClientOnly>
-            </p>
+      <main class="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
+        <div class="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
 
-            <p className="mt-4 mb-4">
-              <Badge variant="secondary" size="2rem">Next deadline </Badge>
-            </p>
-            <strong class="mt-3">Review meeting with the team in 2 days </strong>
-            <Separator class="mt-2 mb-2" />
-            <strong className="mb-5">Review meeting with the client in 5 days </strong>
+          <Card>
+            <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle class="text-m font-medium"> KNKY </CardTitle>
+              <img class="h-[30px] dark:invert" src="https://client-test.knky.co/images/knky.svg" />
+            </CardHeader>
+            <CardContent>
+              <div class="text-3xl font-bold ">Dashboard Review</div>
+              <p class="text-s  mb-5 text-muted-foreground">
+                <ClientOnly>
+                  <Countdown deadlineISO="2024-05-13T08:39:49.108Z" mainFlipBackgroundColor="#000"
+                    secondFlipBackgroundColor="#000" :flipAnimation="false"
+                    :labelColor="colorMode.preference == 'light' ? 'black' : 'white'"
+                    :mainColor="colorMode.preference == 'light' ? 'black' : 'white'" secondFlipColor="#ffffff"
+                    @timeElapsed="(time: any) => {
+                      console.log(time)
+                    }" />
+                </ClientOnly>
+              </p>
 
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle class="text-m font-medium"> KNKY </CardTitle>
-            <img class="h-[30px] dark:invert" src="https://client-test.knky.co/images/knky.svg" />
-          </CardHeader>
-          <CardContent>
-            <div class="text-3xl font-bold ">Dashboard Review</div>
-            <p class="text-s  mb-5 text-muted-foreground">
-              <ClientOnly>
-                <Countdown deadlineISO="2024-05-13T08:39:49.108Z" mainFlipBackgroundColor="#000"
-                  secondFlipBackgroundColor="#000" :flipAnimation="false"
-                  :labelColor="colorMode.preference == 'light' ? 'black' : 'white'"
-                  :mainColor="colorMode.preference == 'light' ? 'black' : 'white'" secondFlipColor="#ffffff"
-                  @timeElapsed="(time: any) => {
-                    console.log(time)
-                  }" />
-              </ClientOnly>
-            </p>
+              <p className="mt-4 mb-4">
+                <Badge variant="secondary" size="2rem">Next deadline </Badge>
+              </p>
+              <strong class="mt-3">Review meeting with the team in 2 days </strong>
+              <Separator class="mt-2 mb-2" />
+              <strong className="mb-5">Review meeting with the client in 5 days </strong>
 
-            <p className="mt-4 mb-4">
-              <Badge variant="secondary" size="2rem">Next deadline </Badge>
-            </p>
-            <strong class="mt-3">Review meeting with the team in 2 days </strong>
-            <Separator class="mt-2 mb-2" />
-            <strong className="mb-5">Review meeting with the client in 5 days </strong>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle class="text-m font-medium"> KNKY </CardTitle>
+              <img class="h-[30px] dark:invert" src="https://client-test.knky.co/images/knky.svg" />
+            </CardHeader>
+            <CardContent>
+              <div class="text-3xl font-bold ">Dashboard Review</div>
+              <p class="text-s  mb-5 text-muted-foreground">
+                <ClientOnly>
+                  <Countdown deadlineISO="2024-05-13T08:39:49.108Z" mainFlipBackgroundColor="#000"
+                    secondFlipBackgroundColor="#000" :flipAnimation="false"
+                    :labelColor="colorMode.preference == 'light' ? 'black' : 'white'"
+                    :mainColor="colorMode.preference == 'light' ? 'black' : 'white'" secondFlipColor="#ffffff"
+                    @timeElapsed="(time: any) => {
+                      console.log(time)
+                    }" />
+                </ClientOnly>
+              </p>
 
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle class="text-m font-medium"> KNKY </CardTitle>
-            <img class="h-[30px] dark:invert" src="https://client-test.knky.co/images/knky.svg" />
-          </CardHeader>
-          <CardContent>
-            <div class="text-3xl font-bold ">Dashboard Review</div>
-            <p class="text-s  mb-5 text-muted-foreground">
-              <ClientOnly>
-                <Countdown deadlineISO="2024-05-13T08:39:49.108Z" mainFlipBackgroundColor="#000"
-                  secondFlipBackgroundColor="#000" :flipAnimation="false"
-                  :labelColor="colorMode.preference == 'light' ? 'black' : 'white'"
-                  :mainColor="colorMode.preference == 'light' ? 'black' : 'white'" secondFlipColor="#ffffff"
-                  @timeElapsed="(time: any) => {
-                    console.log(time)
-                  }" />
-              </ClientOnly>
-            </p>
+              <p className="mt-4 mb-4">
+                <Badge variant="secondary" size="2rem">Next deadline </Badge>
+              </p>
+              <strong class="mt-3">Review meeting with the team in 2 days </strong>
+              <Separator class="mt-2 mb-2" />
+              <strong className="mb-5">Review meeting with the client in 5 days </strong>
 
-            <p className="mt-4 mb-4">
-              <Badge variant="secondary" size="2rem">Next deadline </Badge>
-            </p>
-            <strong class="mt-3">Review meeting with the team in 2 days </strong>
-            <Separator class="mt-2 mb-2" />
-            <strong className="mb-5">Review meeting with the client in 5 days </strong>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle class="text-m font-medium"> KNKY </CardTitle>
+              <img class="h-[30px] dark:invert" src="https://client-test.knky.co/images/knky.svg" />
+            </CardHeader>
+            <CardContent>
+              <div class="text-3xl font-bold ">Dashboard Review</div>
+              <p class="text-s  mb-5 text-muted-foreground">
+                <ClientOnly>
+                  <Countdown deadlineISO="2024-05-13T08:39:49.108Z" mainFlipBackgroundColor="#000"
+                    secondFlipBackgroundColor="#000" :flipAnimation="false"
+                    :labelColor="colorMode.preference == 'light' ? 'black' : 'white'"
+                    :mainColor="colorMode.preference == 'light' ? 'black' : 'white'" secondFlipColor="#ffffff"
+                    @timeElapsed="(time: any) => {
+                      console.log(time)
+                    }" />
+                </ClientOnly>
+              </p>
 
-          </CardContent>
-        </Card>
+              <p className="mt-4 mb-4">
+                <Badge variant="secondary" size="2rem">Next deadline </Badge>
+              </p>
+              <strong class="mt-3">Review meeting with the team in 2 days </strong>
+              <Separator class="mt-2 mb-2" />
+              <strong className="mb-5">Review meeting with the client in 5 days </strong>
+
+            </CardContent>
+          </Card>
 
 
-      </div>
-    </main>
+        </div>
+      </main>
+    </ClientOnly>
+
   </div>
 </template>
 <style>
