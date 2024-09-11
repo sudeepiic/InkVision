@@ -36,76 +36,53 @@ import {
 } from '@/components/ui/table'
 import { cn, valueUpdater } from '@/lib/utils'
 
+
 export interface Payment {
   id: string
   amount: number
-  status: 'pending' | 'processing' | 'success' | 'failed'
-  email: string
+  status: 'pending' | 'processing' | 'success' | 'failed' | 'project_name',
+  deadlines?: string
+  project_name?: string
 }
 
+const supabase = useSupabaseClient()
+const { data: apidata } = await supabase
+  .from('projects')
+  .select()
+
+console.log(apidata)
+const projects = useState('projects', () => apidata)
+console.log("state", projects)
 const data: Payment[] = [
-  {
-    id: 'm5gr84i9',
-    amount: 316,
-    status: 'success',
-    email: 'ken99@yahoo.com',
-  },
-  {
-    id: '3u1reuv4',
-    amount: 242,
-    status: 'success',
-    email: 'Abe45@gmail.com',
-  },
-  {
-    id: 'derv1ws0',
-    amount: 837,
-    status: 'processing',
-    email: 'Monserrat44@gmail.com',
-  },
-  {
-    id: '5kma53ae',
-    amount: 874,
-    status: 'success',
-    email: 'Silas22@gmail.com',
-  },
-  {
-    id: 'bhqecj4p',
-    amount: 721,
-    status: 'failed',
-    email: 'carmella@hotmail.com',
-  },
+
+  // @ts-ignore 
+  ...projects.value
+
 ]
 
 const columnHelper = createColumnHelper<Payment>()
 
 const columns = [
- 
-  columnHelper.accessor('status', {
-    enablePinning: true,
-    header: 'Status',
-    cell: ({ row }) => h('div', { class: 'capitalize' }, row.getValue('status')),
-  }),
-  columnHelper.accessor('email', {
+  columnHelper.accessor('project_name', {
     header: ({ column }) => {
       return h(Button, {
         variant: 'ghost',
         onClick: () => column.toggleSorting(column.getIsSorted() === 'asc'),
-      }, () => ['Email', h(ArrowUpDown, { class: 'ml-2 h-4 w-4' })])
+      }, () => ['Project Name', h(ArrowUpDown, { class: 'ml-2 h-4 w-4 pl-0' })])
     },
-    cell: ({ row }) => h('div', { class: 'lowercase' }, row.getValue('email')),
+    cell: ({ row }) => h('div', { class: 'capitalize' }, row.getValue('project_name')),
   }),
+  columnHelper.accessor('deadlines', {
+    enablePinning: true,
+    header: 'Deadlines',
+    cell: ({ row }) => h('div', { class: 'capitalize' }, row.getValue('deadlines')?.length),
+  }),
+
   columnHelper.accessor('amount', {
     header: () => h('div', { class: 'text-right' }, 'Amount'),
     cell: ({ row }) => {
       const amount = Number.parseFloat(row.getValue('amount'))
-
-      // Format the amount as a dollar amount
-      const formatted = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-      }).format(amount)
-
-      return h('div', { class: 'text-right font-medium' }, formatted)
+      return h('div', { class: 'text-right font-medium' }, amount)
     },
   }),
   columnHelper.display({
@@ -114,7 +91,7 @@ const columns = [
     cell: ({ row }) => {
       const payment = row.original
 
-      return h('div', { class: 'relative' } )
+      return h('div', { class: 'relative' })
     },
   }),
 ]
@@ -150,28 +127,21 @@ const table = useVueTable({
 <template>
   <div class="w-full">
     <div class="flex gap-2 items-center py-4">
-      <Input
-        class="max-w-sm"
-        placeholder="Filter emails..."
+      <Input class="max-w-sm" placeholder="Filter emails..."
         :model-value="table.getColumn('email')?.getFilterValue() as string"
-        @update:model-value=" table.getColumn('email')?.setFilterValue($event)"
-      />
+        @update:model-value=" table.getColumn('email')?.setFilterValue($event)" />
       <DropdownMenu>
         <DropdownMenuTrigger as-child>
           <Button variant="outline" class="ml-auto">
-            Columns <ChevronDown class="ml-2 h-4 w-4" />
+            Columns
+            <ChevronDown class="ml-2 h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuCheckboxItem
-            v-for="column in table.getAllColumns().filter((column) => column.getCanHide())"
-            :key="column.id"
-            class="capitalize"
-            :checked="column.getIsVisible()"
-            @update:checked="(value) => {
+          <DropdownMenuCheckboxItem v-for="column in table.getAllColumns().filter((column) => column.getCanHide())"
+            :key="column.id" class="capitalize" :checked="column.getIsVisible()" @update:checked="(value) => {
               column.toggleVisibility(!!value)
-            }"
-          >
+            }">
             {{ column.id }}
           </DropdownMenuCheckboxItem>
         </DropdownMenuContent>
@@ -181,41 +151,32 @@ const table = useVueTable({
       <Table>
         <TableHeader>
           <TableRow v-for="headerGroup in table.getHeaderGroups()" :key="headerGroup.id">
-            <TableHead
-              v-for="header in headerGroup.headers" :key="header.id" :data-pinned="header.column.getIsPinned()"
+            <TableHead v-for="header in headerGroup.headers" :key="header.id" :data-pinned="header.column.getIsPinned()"
               :class="cn(
                 { 'sticky bg-background/95': header.column.getIsPinned() },
                 header.column.getIsPinned() === 'left' ? 'left-0' : 'right-0',
-              )"
-            >
-              <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.header" :props="header.getContext()" />
+              )">
+              <FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.header"
+                :props="header.getContext()" />
             </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           <template v-if="table.getRowModel().rows?.length">
-            <TableRow
-              v-for="row in table.getRowModel().rows"
-              :key="row.id"
-              :data-state="row.getIsSelected() && 'selected'"
-            >
-              <TableCell
-                v-for="cell in row.getVisibleCells()" :key="cell.id" :data-pinned="cell.column.getIsPinned()"
+            <TableRow v-for="row in table.getRowModel().rows" :key="row.id"
+              :data-state="row.getIsSelected() && 'selected'">
+              <TableCell v-for="cell in row.getVisibleCells()" :key="cell.id" :data-pinned="cell.column.getIsPinned()"
                 :class="cn(
                   { 'sticky bg-background/95': cell.column.getIsPinned() },
                   cell.column.getIsPinned() === 'left' ? 'left-0' : 'right-0',
-                )"
-              >
+                )">
                 <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
               </TableCell>
             </TableRow>
           </template>
 
           <TableRow v-else>
-            <TableCell
-              :colspan="columns.length"
-              class="h-24 text-center"
-            >
+            <TableCell :colspan="columns.length" class="h-24 text-center">
               No results.
             </TableCell>
           </TableRow>
@@ -229,20 +190,10 @@ const table = useVueTable({
         {{ table.getFilteredRowModel().rows.length }} row(s) selected.
       </div>
       <div class="space-x-2">
-        <Button
-          variant="outline"
-          size="sm"
-          :disabled="!table.getCanPreviousPage()"
-          @click="table.previousPage()"
-        >
+        <Button variant="outline" size="sm" :disabled="!table.getCanPreviousPage()" @click="table.previousPage()">
           Previous
         </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          :disabled="!table.getCanNextPage()"
-          @click="table.nextPage()"
-        >
+        <Button variant="outline" size="sm" :disabled="!table.getCanNextPage()" @click="table.nextPage()">
           Next
         </Button>
       </div>

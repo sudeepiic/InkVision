@@ -94,9 +94,6 @@ const colorMode = useColorMode();
                 </ClientOnly>
               </p>
 
-              <p className="mt-4 mb-4">
-                <Badge variant="secondary" size="2rem">Next deadline </Badge>
-              </p>
               <strong class="mt-3">Review meeting with the team in 2 days </strong>
               <Separator class="mt-2 mb-2" />
               <strong className="mb-5">Review meeting with the client in 5 days </strong>
@@ -122,9 +119,6 @@ const colorMode = useColorMode();
                 </ClientOnly>
               </p>
 
-              <p className="mt-4 mb-4">
-                <Badge variant="secondary" size="2rem">Next deadline </Badge>
-              </p>
               <strong class="mt-3">Review meeting with the team in 2 days </strong>
               <Separator class="mt-2 mb-2" />
               <strong className="mb-5">Review meeting with the client in 5 days </strong>
@@ -150,16 +144,14 @@ const colorMode = useColorMode();
                 </ClientOnly>
               </p>
 
-              <p className="mt-4 mb-4">
-                <Badge variant="secondary" size="2rem">Next deadline </Badge>
-              </p>
+
               <strong class="mt-3">Review meeting with the team in 2 days </strong>
               <Separator class="mt-2 mb-2" />
               <strong className="mb-5">Review meeting with the client in 5 days </strong>
 
             </CardContent>
           </Card>
-
+          p
 
         </div>
       </main>

@@ -2,9 +2,6 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Bell, CircleUser, Home, LineChart, LogOutIcon, Menu, Package, Package2, Search, ShoppingCart, Users } from 'lucide-vue-next'
-import { Badge } from '@/components/ui/badge'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { ProjectDialog } from '~/components/ui/project-dialog'
 import { ProjectsTable } from '~/components/ui/projects-table'
@@ -24,7 +21,7 @@ const { data } = await supabase
   .select()
 
 console.log(data)
-const projects = useState('counter', () => data)
+const projects = useState('projects', () => data)
 console.log("state", projects)
 
 </script>
