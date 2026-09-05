@@ -1,5 +1,19 @@
 
+<script setup lang="ts">
+import { Loading } from '@/components/ui/loading/Loading.vue'
+const isLoading = ref(false)
+
+onBeforeRouteLeave(() => {
+  isLoading.value = true
+})
+
+onBeforeRouteEnter(() => {
+  isLoading.value = false
+})
+</script>
+
 <template>
+  <Loading :show="isLoading" />
   <NuxtPage />
 </template>
 
